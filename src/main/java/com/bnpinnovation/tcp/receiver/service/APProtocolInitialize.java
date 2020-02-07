@@ -30,6 +30,12 @@ public class APProtocolInitialize extends ChannelInitializer<Channel> {
                 OverlordDto.Ap ap = objectMapper.readValue(ByteBufUtil.getBytes(jsonByteBuf), OverlordDto.Ap.class);
                 System.out.println("ap : "+ ap.toString());
             }
+
+            @Override
+            public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+                cause.printStackTrace();
+                ctx.close();
+            }
         });
     }
 }
